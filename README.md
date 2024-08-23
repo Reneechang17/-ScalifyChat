@@ -3,9 +3,9 @@
 ## Project Introduction
 - **ScalifyChat** is a scalable realtime communication system designed to handle high concurrency and ensure reliable message delivery across distributed servers. 
 
-## Version 1 Design and Implementation
+## Version 1 Design and Implementation(Redis & socket.io)
 ### Design Diagram
-![V1 Diagram](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
+![V1 Diagram](https://github.com/Reneechang17/ScalifyChat/blob/main/static/ScalifyChat-v1%20diagram.jpg)
 
 ### Challenge?
 - Version 1 addresses the challenge of cross-server communication in a distributed chat system. 
@@ -16,13 +16,12 @@
 - Socket.IO: Socket.IO is used to establish low-latency, bidirectional communication between the servers and clients. This ensures that messages are delivered with minimal delay.
 - Redis Insight: Use for monitor.
 
-![Server Communication](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
-![Redis Insight](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
+![Server Communication](https://github.com/Reneechang17/ScalifyChat/blob/main/static/Server%20Communication.jpg)
+![Redis Insight](https://github.com/Reneechang17/ScalifyChat/blob/main/static/Redis%20Insight.jpg)
 
-## Version 2 Design and Implementation
+## Version 2 Design and Implementation(Kafka & Postgres)
 ### Design Diagram
-![V2 Diagram](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
-
+![V2 Diagram](https://github.com/Reneechang17/ScalifyChat/blob/main/static/ScalifyChat-v2%20diagram.jpg)
 ### Challenge?
 - Version 2 builds on the foundation laid in Version 1 by addressing the need for message durability, error handling, and further scalability. 
 - The primary challenge here is to ensure that messages are not lost in the event of server failures and to efficiently manage high volumes of messages.
@@ -32,8 +31,8 @@
 - Pause and Resume Mechanism: The Kafka consumer is equipped with a pause and resume mechanism to handle errors during message processing. If an error occurs, the consumer is paused to prevent further errors and automatically resumes after a set period, allowing the system to recover gracefully.
 - PostgreSQL for Persistence: Messages processed by Kafka consumers are stored in a PostgreSQL database for long-term storage, enabling message history and retrieval capabilities.
 
-![Msg stored in Kafka](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
-![Msg stored in Prisma Studio](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
+![Msg stored in Kafka](https://github.com/Reneechang17/ScalifyChat/blob/main/static/Msg%20in%20Kafka.jpg)
+![Msg stored in Prisma Studio](https://github.com/Reneechang17/ScalifyChat/blob/main/static/Msg%20in%20Prisma%20studio.jpg)
 
 ## Future works??
 - Advanced Load Balancing: Implement advanced load balancing strategies to further distribute the message load across multiple Kafka partitions and servers.
