@@ -1,3 +1,46 @@
+# ScalifyChat
+
+## Project Introduction
+- **ScalifyChat** is a scalable realtime communication system designed to handle high concurrency and ensure reliable message delivery across distributed servers. 
+
+## Version 1 Design and Implementation
+### Design Diagram
+![V1 Diagram](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
+
+### Challenge?
+- Version 1 addresses the challenge of cross-server communication in a distributed chat system. 
+- Specifically, the problem arises when users are connected to different servers, making it difficult to ensure that messages are consistently delivered across all servers.
+
+### Solution
+- Redis Pub/Sub: Redis is used as a central message broker to facilitate cross-server communication. When a user sends a message, it is published to a Redis channel. All servers in the system are subscribed to this channel, ensuring that all messages are distributed to users connected to different servers in real time.
+- Socket.IO: Socket.IO is used to establish low-latency, bidirectional communication between the servers and clients. This ensures that messages are delivered with minimal delay.
+- Redis Insight: Use for monitor.
+
+![Server Communication](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
+![Redis Insight](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
+
+## Version 2 Design and Implementation
+### Design Diagram
+![V2 Diagram](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
+
+### Challenge?
+- Version 2 builds on the foundation laid in Version 1 by addressing the need for message durability, error handling, and further scalability. 
+- The primary challenge here is to ensure that messages are not lost in the event of server failures and to efficiently manage high volumes of messages.
+
+### Solution
+- Kafka Integration: Messages published by the servers are now sent to Kafka, which stores them reliably and allows them to be consumed later, ensuring that no messages are lost even if a server goes down.
+- Pause and Resume Mechanism: The Kafka consumer is equipped with a pause and resume mechanism to handle errors during message processing. If an error occurs, the consumer is paused to prevent further errors and automatically resumes after a set period, allowing the system to recover gracefully.
+- PostgreSQL for Persistence: Messages processed by Kafka consumers are stored in a PostgreSQL database for long-term storage, enabling message history and retrieval capabilities.
+
+![Msg stored in Kafka](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
+![Msg stored in Prisma Studio](https://github.com/Reneechang17/Spring-MicroJobHub/blob/main/static/progress1/Monolithic%20To%20Microservices.jpg)
+
+## Future works??
+- Advanced Load Balancing: Implement advanced load balancing strategies to further distribute the message load across multiple Kafka partitions and servers.
+- User Presence and Notifications: Add features such as user presence indicators and notifications for missed messages, enhancing the user experience.
+- Security Enhancements: Implement additional security measures, such as end-to-end encryption for messages and authentication mechanisms to safeguard user data and communications.
+
+
 # Turborepo starter
 
 This is an official starter Turborepo.
